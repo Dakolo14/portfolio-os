@@ -48,6 +48,16 @@ export default function Dock() {
       openWindow({ id, kind, folderId, fileId, title, w: 600, h: 500 });
     }
   };
+  
+  const handleHomeClick = () => {
+    playClick();
+    // Minimize all open windows to show the desktop/home
+    windows.forEach((w) => {
+      if (!w.minimized) {
+        minimizeWindow(w.id);
+      }
+    });
+  };
 
   const getWindowState = (folderId) => {
     const win = windows.find(
@@ -65,7 +75,25 @@ export default function Dock() {
   return (
     <div className="dock">
       <div className="dock__container">
-        {/* About / Profile */}
+      
+        {/* 1. Home */}
+        <button
+          className="dock__item"
+          onClick={handleHomeClick}
+          title="Home"
+        >
+          <div className="dock__icon-wrapper">
+            <div className="dock__special-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+          </div>
+          <span className="dock__label">Home</span>
+        </button>
+
+        {/* 2. About / Profile */}
         <button
           className={`dock__item ${isWindowOpen("file-resume") ? "dock__item--active" : ""}`}
           onClick={() =>
@@ -86,9 +114,33 @@ export default function Dock() {
             <span className="dock__indicator" />
           )}
         </button>
+        
+        {/* 3. Portfolio / Work — opens worldwideadhd folder */}
+        <button
+          className={`dock__item ${isWindowOpen("folder-worldwideadhd") ? "dock__item--active" : ""}`}
+          onClick={() => {
+            playClick();
+            const folder = desktop.find((f) => f.id === "worldwideadhd");
+            if (folder) handleDockClick(folder);
+          }}
+          title="Portfolio"
+        >
+          <div className="dock__icon-wrapper">
+            <div className="dock__special-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+              </svg>
+            </div>
+          </div>
+          <span className="dock__label">Portfolio</span>
+          {windows.some((w) => w.id === "folder-worldwideadhd") && (
+            <span className="dock__indicator" />
+          )}
+        </button>
 
-        {/* Folder launchers */}
-        {desktop.map((folder) => {
+        {/* 4. Other Folder launchers (excluding worldwideadhd) */}
+        {desktop.filter((f) => f.id !== "worldwideadhd").map((folder) => {
           const windowState = getWindowState(folder.id);
           return (
             <button
@@ -115,31 +167,7 @@ export default function Dock() {
           );
         })}
 
-        {/* Portfolio / Work — opens worldwideadhd folder */}
-        <button
-          className={`dock__item ${isWindowOpen("folder-worldwideadhd") ? "dock__item--active" : ""}`}
-          onClick={() => {
-            playClick();
-            const folder = desktop.find((f) => f.id === "worldwideadhd");
-            if (folder) handleDockClick(folder);
-          }}
-          title="Portfolio"
-        >
-          <div className="dock__icon-wrapper">
-            <div className="dock__special-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-              </svg>
-            </div>
-          </div>
-          <span className="dock__label">Portfolio</span>
-          {windows.some((w) => w.id === "folder-worldwideadhd") && (
-            <span className="dock__indicator" />
-          )}
-        </button>
-
-        {/* Terminal launcher */}
+        {/* 5. Terminal launcher */}
         <button
           className={`dock__item ${windows.find((w) => w.kind === "terminal") ? "dock__item--active" : ""}`}
           onClick={() => {

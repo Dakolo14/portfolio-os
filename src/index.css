@@ -830,50 +830,64 @@ body {
    ============================================================ */
 
 @media (max-width: 767px) {
-  /* Top panel — smaller */
+  /* Top panel — optimized for mobile */
   .top-panel {
-    height: 24px;
-    font-size: 0.75rem;
-    padding: 0 0.5rem;
+    height: auto;
+    min-height: 40px;
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
-  .top-panel__activities {
-    font-size: 0.7rem;
+  .top-panel__left {
+    display: none; /* Hide redundant nav on mobile (dock has them) */
+  }
+
+  .top-panel__center {
+    position: static;
+    transform: none;
+    flex: 1;
+    justify-content: flex-start;
+  }
+
+  .top-panel__right {
+    gap: 0.75rem;
   }
 
   .top-panel__right svg {
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
   }
 
-  /* Desktop icons — horizontal grid instead of vertical column */
+  /* Desktop icons — horizontal grid */
   .desktop__icons {
     flex-direction: row;
     flex-wrap: wrap;
     height: auto;
-    padding: 0.75rem;
-    gap: 0.75rem;
+    padding: 1rem;
+    gap: 1rem;
     justify-content: flex-start;
     align-content: flex-start;
   }
 
   .desktop-icon {
-    width: 70px;
-    padding: 0.4rem;
+    width: 80px;
+    padding: 0.5rem;
   }
 
   .desktop-icon__img {
-    width: 56px;
-    height: 56px;
+    width: 64px !important;
+    height: 64px !important;
   }
 
   .desktop-icon__label {
-    font-size: 0.65rem;
+    font-size: 0.75rem !important;
   }
 
-  /* Window layer — full coverage */
+  /* Window layer — match panel height */
   .window-layer {
-    top: 24px; /* match smaller panel */
+    top: 40px; 
   }
 
   /* Windows — near-fullscreen stacked */
@@ -931,102 +945,77 @@ body {
     max-width: 100%;
   }
 
-  /* Dock — simplified, smaller */
+  /* Dock — sliding, bigger touch targets */
   .dock {
     bottom: 0.5rem;
+    width: 100%;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
   }
 
   .dock__container {
-    padding: 0.25rem 0.5rem;
-    gap: 0.125rem;
-    border-radius: 0.75rem;
-    max-width: calc(100vw - 1rem);
+    padding: 0.75rem;
+    gap: 0.75rem;
+    border-radius: 1rem;
+    max-width: 100%;
     overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    justify-content: flex-start;
+  }
+
+  .dock__container::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
   }
 
   .dock__item {
-    min-width: 48px;
+    width: 22vw; /* Exactly forces ~4.5 items to be visible */
+    min-width: 64px;
+    max-width: 80px;
     padding: 0.25rem;
+    flex-shrink: 0; /* Enable sliding */
   }
 
   .dock__icon-wrapper {
-    width: 32px;
-    height: 32px;
+    width: 56px;
+    height: 56px;
   }
 
   .dock__icon {
-    width: 28px;
-    height: 28px;
+    width: 48px !important;
+    height: 48px !important;
   }
 
-  .dock__terminal-icon {
-    width: 28px;
-    height: 28px;
-    font-size: 11px;
+  .dock__special-icon {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .dock__special-icon--terminal {
+    font-size: 14px;
   }
 
   .dock__label {
-    font-size: 0.55rem;
-    max-width: 48px;
-  }
-
-  /* Boot screen — smaller text */
-  .boot-screen__time {
-    font-size: 3rem;
-  }
-
-  .boot-screen__date {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .boot-screen__avatar-circle {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
-  }
-
-  .boot-screen__username {
-    font-size: 1rem;
-  }
-
-  .boot-screen__hint {
-    font-size: 0.75rem;
-  }
-
-  /* Terminal — touch-friendly */
-  .terminal {
-    font-size: 0.75rem;
-    padding: 0.75rem;
-  }
-
-  /* Context menu — disable on mobile (use tap instead) */
-  .context-menu {
-    display: none;
+    font-size: 0.75rem !important;
+    max-width: 64px;
+    margin-top: 4px;
   }
 }
 
 /* Extra small screens (< 400px) */
 @media (max-width: 399px) {
   .desktop__icons {
-    gap: 0.5rem;
-    padding: 0.5rem;
+    gap: 0.75rem;
+    padding: 0.75rem;
   }
 
   .desktop-icon {
-    width: 60px;
+    width: 70px;
   }
 
   .desktop-icon__img {
-    width: 44px;
-    height: 44px;
-  }
-
-  .dock__label {
-    display: none;
-  }
-
-  .dock__item {
-    min-width: 40px;
+    width: 56px !important;
+    height: 56px !important;
   }
 }
