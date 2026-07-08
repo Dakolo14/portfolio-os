@@ -1,0 +1,1032 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Global Theme & Typography
+   ============================================================ */
+
+:root {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --panel-bg: rgba(24, 24, 27, 0.65);
+  --panel-border: rgba(255, 255, 255, 0.1);
+  --window-bg: #1e1e24;
+  --window-border: rgba(255, 255, 255, 0.1);
+  --titlebar-bg: #2d2d34;
+  --titlebar-unfocused: #25252b;
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --accent: #6366f1;
+  --file-bg: #1a1a1f;
+  --terminal-bg: #1e1e1e;
+  --body-bg: #000;
+  --icon-desktop-size: 72px;
+  --icon-container-size: 80px;
+  --icon-text-size: 0.75rem;
+  --icon-dock-size: 36px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--body-bg);
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ============================================================
+   OS Shell & Desktop
+   ============================================================ */
+
+.os-shell {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.desktop {
+  flex: 1;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.window-layer {
+  position: absolute;
+  top: 28px;          /* below the top panel */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;  /* let clicks pass through to the desktop */
+  z-index: 500;
+}
+
+.window-layer > * {
+  pointer-events: auto;  /* but windows themselves are interactive */
+}
+
+.desktop__icons {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  height: calc(100vh - 100px);
+  align-content: flex-start;
+}
+
+/* ============================================================
+   Desktop Icons
+   ============================================================ */
+
+.desktop-icon {
+  width: var(--icon-container-size);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: width 0.2s, background-color 0.1s;
+}
+
+.desktop-icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.desktop-icon--selected {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.desktop-icon__img {
+  width: var(--icon-desktop-size);
+  height: var(--icon-desktop-size);
+  object-fit: contain;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+  transition: width 0.2s, height 0.2s;
+}
+
+.desktop-icon__label {
+  margin-top: 0.25rem;
+  font-size: var(--icon-text-size);
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  font-weight: 500;
+  word-wrap: break-word;
+  max-width: 100%;
+  transition: font-size 0.2s;
+}
+
+/* ============================================================
+   Top Panel (GNOME Style)
+   ============================================================ */
+
+.top-panel {
+  height: 28px;
+  background: var(--panel-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  z-index: 9999;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.top-panel__left, .top-panel__center, .top-panel__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.top-panel__center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.top-panel__nav-item {
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+}
+
+.top-panel__nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-panel__social,
+.top-panel__sound-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  padding: 0;
+}
+
+.top-panel__social:hover,
+.top-panel__sound-toggle:hover {
+  opacity: 1;
+}
+
+.top-panel__divider {
+  width: 1px;
+  height: 14px;
+  background-color: var(--panel-border);
+  margin: 0 4px;
+}
+
+/* ============================================================
+   Dock
+   ============================================================ */
+
+.dock {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9998;
+}
+
+.dock__container {
+  background: var(--panel-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--panel-border);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.dock__item {
+  position: relative;
+  min-width: 64px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  transition: transform 0.2s, background-color 0.2s;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.dock__item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1) translateY(-4px);
+}
+
+.dock__icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+}
+
+.dock__icon {
+  width: var(--icon-dock-size);
+  height: var(--icon-dock-size);
+  object-fit: contain;
+  transition: width 0.2s, height 0.2s;
+}
+
+.dock__label {
+  font-size: var(--icon-text-size, 0.7rem);
+  color: var(--text-primary);
+  text-align: center;
+  white-space: nowrap;
+  max-width: 72px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  transition: font-size 0.2s;
+}
+
+.dock__special-icon {
+  width: var(--icon-dock-size);
+  height: var(--icon-dock-size);
+  background: linear-gradient(135deg, #444, #222);
+  border-radius: 20%;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.2);
+  transition: width 0.2s, height 0.2s;
+}
+
+.dock__special-icon svg {
+  width: 60%;
+  height: 60%;
+}
+
+.dock__special-icon--terminal {
+  background: #111;
+  border: 2px solid #333;
+  color: #10b981;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.dock__indicator {
+  position: absolute;
+  bottom: -4px;
+  width: 4px;
+  height: 4px;
+  background-color: var(--text-primary);
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.dock__indicator--minimized {
+  opacity: 0.4;
+}
+
+/* ============================================================
+   Windows
+   ============================================================ */
+
+.window {
+  background: var(--window-bg);
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--window-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+}
+
+.window--opening {
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.window--closing {
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.window--unfocused {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+.window__titlebar {
+  height: 32px;
+  background: var(--titlebar-bg);
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  user-select: none;
+}
+
+.window--unfocused .window__titlebar {
+  background: var(--titlebar-unfocused);
+}
+
+.window--mobile {
+  position: absolute !important;
+  top: 1rem !important;
+  left: 1rem !important;
+  width: calc(100vw - 2rem) !important;
+  height: calc(100vh - 5rem) !important;
+  transform: none !important;
+}
+
+.window__controls {
+  display: flex;
+  gap: 0.5rem;
+  width: 60px;
+}
+
+.window__controls-spacer {
+  width: 60px; /* Balance title centering */
+}
+
+.window__btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.window__btn-symbol {
+  opacity: 0;
+  line-height: 1;
+}
+
+.window__controls:hover .window__btn-symbol {
+  opacity: 1;
+}
+
+.window__btn--close { background-color: #ff5f56; }
+.window__btn--minimize { background-color: #ffbd2e; }
+.window__btn--maximize { background-color: #27c93f; }
+
+.window--unfocused .window__btn {
+  background-color: #4a4a52;
+}
+
+.window--unfocused .window__btn-symbol {
+  opacity: 0 !important;
+}
+
+.window__title {
+  flex: 1;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.window--focused .window__title {
+  color: var(--text-primary);
+}
+
+.window__content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--window-bg);
+}
+
+/* ============================================================
+   Folder Content
+   ============================================================ */
+
+.folder-window {
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.folder-window__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 1.5rem;
+}
+
+.folder-window--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.folder-window__empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+/* ============================================================
+   File Icon (inside folders)
+   ============================================================ */
+
+.file-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.file-icon:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.file-icon__label {
+  margin-top: 0.5rem;
+  font-size: var(--icon-text-size, 0.75rem);
+  text-align: center;
+  color: var(--text-primary);
+  word-wrap: break-word;
+  max-width: 100%;
+  transition: font-size 0.2s;
+}
+
+/* ============================================================
+   File Content (Write-ups)
+   ============================================================ */
+
+.file-window {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  overflow-y: auto;
+  user-select: text;
+  background-color: var(--file-bg);
+}
+
+.file-window__header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--window-border);
+  padding-bottom: 1rem;
+}
+
+.file-window__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.file-window__date {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.file-window__body {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #e4e4e7;
+  max-width: 65ch;
+  margin: 0 auto;
+}
+
+.file-window__body h2 {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.file-window__body h3 {
+  font-size: 1.25rem;
+  margin: 1.5rem 0 0.75rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.file-window__body p {
+  margin-bottom: 1rem;
+}
+
+.file-window__body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.file-window__body a:hover {
+  text-decoration: underline;
+}
+
+.file-window__body ul {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.file-window__body li {
+  margin-bottom: 0.25rem;
+}
+
+.file-window__table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.file-window__table th,
+.file-window__table td {
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.file-window__table th {
+  background-color: rgba(255,255,255,0.05);
+}
+
+/* ============================================================
+   Terminal
+   ============================================================ */
+
+.terminal {
+  width: 100%;
+  height: 100%;
+  background-color: var(--terminal-bg);
+  padding: 1rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  overflow-y: auto;
+  cursor: text;
+  user-select: text;
+}
+
+.terminal__output {
+  margin-bottom: 0.5rem;
+}
+
+.terminal__line {
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+.terminal__line--output {
+  color: #d4d4d4;
+  margin-bottom: 0.5rem;
+}
+
+.terminal__prompt {
+  color: #10b981;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.terminal__input-line {
+  display: flex;
+  align-items: center;
+}
+
+.terminal__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #d4d4d4;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+}
+
+/* ============================================================
+   Boot Screen & Lock
+   ============================================================ */
+
+.boot-screen {
+  position: fixed;
+  inset: 0;
+  background-color: #000;
+  z-index: 10000;
+  display: flex;
+  color: #fff;
+}
+
+.boot-screen--terminal {
+  font-family: monospace;
+  padding: 2rem;
+}
+
+.boot-screen__line {
+  margin-bottom: 0.25rem;
+  color: #0f0;
+}
+
+.boot-screen__cursor {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.boot-screen--lock {
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+  background-image: url('./assets/wallpaper.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.boot-screen--lock::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.boot-screen__lock-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.boot-screen__time {
+  font-size: 5rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.boot-screen__date {
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.boot-screen__avatar {
+  margin-bottom: 1rem;
+}
+
+.boot-screen__avatar-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #6366f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.boot-screen__username {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.boot-screen__hint {
+  font-size: 0.875rem;
+  opacity: 0.7;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.boot-screen--fadeout {
+  animation: fadeOut 0.4s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* ============================================================
+   Context Menu
+   ============================================================ */
+
+.context-menu {
+  position: absolute;
+  background: var(--panel-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--panel-border);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0;
+  min-width: 180px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+}
+
+.context-menu__item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.context-menu__item:hover {
+  background-color: var(--accent);
+}
+
+.context-menu__icon {
+  width: 24px;
+  display: inline-block;
+}
+
+.context-menu__separator {
+  height: 1px;
+  background-color: var(--panel-border);
+  margin: 0.25rem 0;
+}
+
+.context-menu__header {
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.context-menu__back {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  padding: 0.25rem 0.5rem;
+}
+
+.context-menu__back:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+}
+
+.context-menu__color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.context-menu__check {
+  margin-left: auto;
+}
+
+.context-menu__chevron {
+  margin-left: auto;
+  opacity: 0.5;
+}
+
+.context-menu__item--active {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================================
+   Mobile Responsiveness (< 768px)
+   ============================================================ */
+
+@media (max-width: 767px) {
+  /* Top panel — smaller */
+  .top-panel {
+    height: 24px;
+    font-size: 0.75rem;
+    padding: 0 0.5rem;
+  }
+
+  .top-panel__activities {
+    font-size: 0.7rem;
+  }
+
+  .top-panel__right svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Desktop icons — horizontal grid instead of vertical column */
+  .desktop__icons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 0.75rem;
+    gap: 0.75rem;
+    justify-content: flex-start;
+    align-content: flex-start;
+  }
+
+  .desktop-icon {
+    width: 70px;
+    padding: 0.4rem;
+  }
+
+  .desktop-icon__img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .desktop-icon__label {
+    font-size: 0.65rem;
+  }
+
+  /* Window layer — full coverage */
+  .window-layer {
+    top: 24px; /* match smaller panel */
+  }
+
+  /* Windows — near-fullscreen stacked */
+  .window--mobile {
+    position: absolute !important;
+    top: 0.5rem !important;
+    left: 0.5rem !important;
+    width: calc(100vw - 1rem) !important;
+    height: calc(100vh - 5rem) !important;
+    border-radius: 0.75rem;
+    transform: none !important;
+  }
+
+  .window__titlebar {
+    height: 36px; /* bigger touch target */
+    padding: 0 0.5rem;
+  }
+
+  .window__btn {
+    width: 14px;
+    height: 14px;
+  }
+
+  .window__title {
+    font-size: 0.8rem;
+  }
+
+  .window__content {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Folder window content */
+  .folder-window {
+    padding: 1rem;
+  }
+
+  .folder-window__grid {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 1rem;
+  }
+
+  /* File window content — readable on small screens */
+  .file-window {
+    padding: 1rem;
+  }
+
+  .file-window__title {
+    font-size: 1.25rem;
+  }
+
+  .file-window__body {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 100%;
+  }
+
+  /* Dock — simplified, smaller */
+  .dock {
+    bottom: 0.5rem;
+  }
+
+  .dock__container {
+    padding: 0.25rem 0.5rem;
+    gap: 0.125rem;
+    border-radius: 0.75rem;
+    max-width: calc(100vw - 1rem);
+    overflow-x: auto;
+  }
+
+  .dock__item {
+    min-width: 48px;
+    padding: 0.25rem;
+  }
+
+  .dock__icon-wrapper {
+    width: 32px;
+    height: 32px;
+  }
+
+  .dock__icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .dock__terminal-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+
+  .dock__label {
+    font-size: 0.55rem;
+    max-width: 48px;
+  }
+
+  /* Boot screen — smaller text */
+  .boot-screen__time {
+    font-size: 3rem;
+  }
+
+  .boot-screen__date {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .boot-screen__avatar-circle {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .boot-screen__username {
+    font-size: 1rem;
+  }
+
+  .boot-screen__hint {
+    font-size: 0.75rem;
+  }
+
+  /* Terminal — touch-friendly */
+  .terminal {
+    font-size: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  /* Context menu — disable on mobile (use tap instead) */
+  .context-menu {
+    display: none;
+  }
+}
+
+/* Extra small screens (< 400px) */
+@media (max-width: 399px) {
+  .desktop__icons {
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .desktop-icon {
+    width: 60px;
+  }
+
+  .desktop-icon__img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .dock__label {
+    display: none;
+  }
+
+  .dock__item {
+    min-width: 40px;
+  }
+}
