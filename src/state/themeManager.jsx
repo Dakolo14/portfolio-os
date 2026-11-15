@@ -142,8 +142,6 @@ export function ThemeProvider({ children }) {
     applyIconSizeToDOM(settings.iconSize);
   }, [theme, settings.iconSize]);
 
-  // Keep the sound module in sync (here, not in TopPanel, so the
-  // boot chime also respects a saved "muted" setting)
   useEffect(() => {
     setSoundEnabled(settings.soundEnabled);
   }, [settings.soundEnabled]);

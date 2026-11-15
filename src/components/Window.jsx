@@ -58,8 +58,6 @@ export default function Window({ win, isMobile }) {
 
   const [isClosing, setIsClosing] = useState(false);
   const [isOpening, setIsOpening] = useState(true);
-  // While dragging/resizing, embedded iframes (YouTube) would swallow the
-  // mouse and make the window stick, so we disable their pointer events.
   const [isInteracting, setIsInteracting] = useState(false);
   const rndRef = useRef(null);
 
@@ -143,9 +141,6 @@ export default function Window({ win, isMobile }) {
     );
   }
 
-  // Desktop: react-rnd window.
-  // Positions are relative to .window-layer, which already starts below the
-  // top panel, so a maximized window sits at y=0 and stops just above the dock.
   const PANEL_HEIGHT = 28;
   const dockTop =
     document.querySelector(".dock")?.getBoundingClientRect().top ??
@@ -181,8 +176,6 @@ export default function Window({ win, isMobile }) {
         );
         moveWindow(win.id, pos.x, pos.y);
       }}
-      // react-rnd sets display:inline-block inline; the window needs flex so
-      // its content area gets a real height and can scroll.
       style={{ zIndex: win.z, display: "flex" }}
       onMouseDown={() => {
         if (!isFocused) focusWindow(win.id);
