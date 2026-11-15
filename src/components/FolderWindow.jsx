@@ -1,5 +1,6 @@
 import FileIcon from "./FileIcon";
 import { useWindows } from "../state/windowManager";
+import { openFile } from "../lib/media";
 
 // ============================================================
 // FolderWindow — Shows files inside a folder as an icon grid
@@ -8,17 +9,7 @@ import { useWindows } from "../state/windowManager";
 export default function FolderWindow({ folder, isMobile }) {
   const { openWindow } = useWindows();
 
-  const handleOpenFile = (file) => {
-    openWindow({
-      id: `file-${file.id}`,
-      kind: "file",
-      folderId: folder.id,
-      fileId: file.id,
-      title: file.name,
-      w: 600,
-      h: 500,
-    });
-  };
+  const handleOpenFile = (file) => openFile(openWindow, folder, file);
 
   if (!folder.files || folder.files.length === 0) {
     return (

@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import { getFileType, getYouTubeId, youTubeThumbUrl } from "../lib/media";
 
 // ============================================================
 // FileIcon — Draggable document icon inside a folder window
@@ -28,7 +29,38 @@ const DocumentIcon = () => (
   </svg>
 );
 
+// Thumbnail for image and video files (Nautilus-style)
+function MediaThumb({ file, type }) {
+  const [failed, setFailed] = useState(false);
+  const ytId = type === "video" ? getYouTubeId(file.youtube || file.src) : null;
+  const thumb = file.thumbnail || (ytId ? youTubeThumbUrl(ytId) : type === "image" ? file.src : file.poster);
+
+  return (
+    <div className={`file-icon__thumb file-icon__thumb--${type}`}>
+      {thumb && !failed ? (
+        <img
+          src={thumb}
+          alt=""
+          loading="lazy"
+          draggable={false}
+          onError={() => setFailed(true)}
+        />
+      ) : (
+        <span className="file-icon__thumb-fallback" aria-hidden="true">
+          {type === "video" ? "🎬" : "🖼"}
+        </span>
+      )}
+      {type === "video" && (
+        <span className="file-icon__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+        </span>
+      )}
+    </div>
+  );
+}
+
 export default function FileIcon({ file, onOpen, isMobile }) {
+  const type = getFileType(file);
   const [dragged, setDragged] = useState(false);
   const startPos = useRef({ x: 0, y: 0 });
 
@@ -69,12 +101,21 @@ export default function FileIcon({ file, onOpen, isMobile }) {
   return (
     <div
       className="file-icon"
+      role="button"
+      tabIndex={0}
+      aria-label={`Open ${file.name}`}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen(file);
+        }
+      }}
     >
-      <DocumentIcon />
+      {type === "text" ? <DocumentIcon /> : <MediaThumb file={file} type={type} />}
       <span className="file-icon__label">{file.name}</span>
     </div>
   );

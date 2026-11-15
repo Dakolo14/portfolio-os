@@ -5,6 +5,8 @@ import { desktop } from "../data/fileSystem";
 import FolderWindow from "./FolderWindow";
 import FileWindow from "./FileWindow";
 import Terminal from "./Terminal";
+import ImageViewer from "./ImageViewer";
+import VideoPlayer from "./VideoPlayer";
 
 // ============================================================
 // Window — Generic window chrome with react-rnd
@@ -50,11 +52,15 @@ export default function Window({ win, isMobile }) {
     maximizeWindow,
     moveWindow,
     resizeWindow,
+    updateWindow,
     focusedId,
   } = useWindows();
 
   const [isClosing, setIsClosing] = useState(false);
   const [isOpening, setIsOpening] = useState(true);
+  // While dragging/resizing, embedded iframes (YouTube) would swallow the
+  // mouse and make the window stick, so we disable their pointer events.
+  const [isInteracting, setIsInteracting] = useState(false);
   const rndRef = useRef(null);
 
   const isFocused = focusedId === win.id;
@@ -90,6 +96,22 @@ export default function Window({ win, isMobile }) {
       const folder = desktop.find((f) => f.id === win.folderId);
       const file = folder?.files.find((f) => f.id === win.fileId);
       return <FileWindow file={file} />;
+    }
+    if (win.kind === "image") {
+      const folder = desktop.find((f) => f.id === win.folderId);
+      if (!folder) return <div className="window__error">Folder not found</div>;
+      return (
+        <ImageViewer
+          folder={folder}
+          fileId={win.fileId}
+          onChange={(f) => updateWindow(win.id, { title: f.name, fileId: f.id })}
+        />
+      );
+    }
+    if (win.kind === "video") {
+      const folder = desktop.find((f) => f.id === win.folderId);
+      const file = folder?.files.find((f) => f.id === win.fileId);
+      return <VideoPlayer file={file} />;
     }
     if (win.kind === "terminal") {
       return <Terminal />;
@@ -144,8 +166,14 @@ export default function Window({ win, isMobile }) {
       dragHandleClassName="window__titlebar"
       disableDragging={win.maximized}
       enableResizing={!win.maximized}
-      onDragStop={(_e, d) => moveWindow(win.id, d.x, d.y)}
+      onDragStart={() => setIsInteracting(true)}
+      onResizeStart={() => setIsInteracting(true)}
+      onDragStop={(_e, d) => {
+        setIsInteracting(false);
+        moveWindow(win.id, d.x, d.y);
+      }}
       onResizeStop={(_e, _direction, ref, _delta, pos) => {
+        setIsInteracting(false);
         resizeWindow(
           win.id,
           parseInt(ref.style.width),
@@ -159,7 +187,7 @@ export default function Window({ win, isMobile }) {
       onMouseDown={() => {
         if (!isFocused) focusWindow(win.id);
       }}
-      className={`window ${isFocused ? "window--focused" : "window--unfocused"} ${isClosing ? "window--closing" : ""} ${isOpening ? "window--opening" : ""}`}
+      className={`window ${isFocused ? "window--focused" : "window--unfocused"} ${isClosing ? "window--closing" : ""} ${isOpening ? "window--opening" : ""} ${isInteracting ? "window--interacting" : ""}`}
     >
       <div className="window__titlebar" onDoubleClick={handleMaximize}>
         <WindowControls

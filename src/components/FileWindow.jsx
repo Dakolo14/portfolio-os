@@ -2,7 +2,26 @@
 // FileWindow — Displays a file's write-up content
 // ============================================================
 // Renders basic markdown-like formatting: headings, bold,
-// links, lists, tables, and preserves line breaks.
+// links, lists, tables, and media lines. A line that is only
+//   ![caption](url)
+// becomes an image, a local video (.mp4/.webm) or a YouTube embed.
+
+import { getYouTubeId, youTubeEmbedUrl, isMediaSrcVideo } from "../lib/media";
+
+const escapeAttr = (s) =>
+  String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+
+function renderMedia(caption, src) {
+  const cap = caption ? `<figcaption>${escapeAttr(caption)}</figcaption>` : "";
+  const ytId = getYouTubeId(src);
+  if (ytId) {
+    return `<figure class="file-window__media file-window__media--video"><div class="file-window__embed"><iframe src="${youTubeEmbedUrl(ytId)}" title="${escapeAttr(caption || "Video")}" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></div>${cap}</figure>`;
+  }
+  if (isMediaSrcVideo(src)) {
+    return `<figure class="file-window__media"><video src="${escapeAttr(src)}" controls playsinline preload="metadata"></video>${cap}</figure>`;
+  }
+  return `<figure class="file-window__media"><img src="${escapeAttr(src)}" alt="${escapeAttr(caption)}" loading="lazy" />${cap}</figure>`;
+}
 
 function renderBody(body) {
   if (!body) return null;
@@ -77,6 +96,14 @@ function renderBody(body) {
     // Empty line ends a list; paragraphs already have their own spacing
     if (trimmed === "") {
       closeList();
+      continue;
+    }
+
+    // Media line: ![caption](url)
+    const media = trimmed.match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
+    if (media) {
+      closeList();
+      elements.push(renderMedia(media[1], media[2]));
       continue;
     }
 

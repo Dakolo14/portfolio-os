@@ -22,20 +22,44 @@ const MOVE_WINDOW = "MOVE_WINDOW";
 const RESIZE_WINDOW = "RESIZE_WINDOW";
 const MAXIMIZE_WINDOW = "MAXIMIZE_WINDOW";
 const HYDRATE = "HYDRATE";
+const UPDATE_WINDOW = "UPDATE_WINDOW";
 
 function getNextZ(windows) {
   if (windows.length === 0) return 100;
   return Math.max(...windows.map((w) => w.z)) + 1;
 }
 
-function getCascadePosition(windows, width, height) {
-  const openCount = windows.filter((w) => !w.minimized).length;
+// Space windows can use: below the top panel and above the dock.
+// Positions are relative to .window-layer (which starts under the panel).
+const PANEL_HEIGHT = 28;
+const DOCK_RESERVE = 124;
+
+function getWorkArea() {
   const screenW = typeof window !== "undefined" ? window.innerWidth : 1024;
   const screenH = typeof window !== "undefined" ? window.innerHeight : 768;
-  const startX = Math.max(0, (screenW - width) / 2);
-  const startY = Math.max(0, (screenH - height) / 2);
+  return { width: screenW, height: Math.max(240, screenH - PANEL_HEIGHT - DOCK_RESERVE) };
+}
+
+// Shrinks a requested size so it fits the work area
+function fitSize(w, h) {
+  const area = getWorkArea();
+  return {
+    w: Math.max(320, Math.min(w, area.width - 32)),
+    h: Math.max(240, Math.min(h, area.height - 16)),
+  };
+}
+
+function getCascadePosition(windows, width, height) {
+  const openCount = windows.filter((w) => !w.minimized).length;
+  const area = getWorkArea();
   const offset = (openCount % 8) * CASCADE_OFFSET;
-  return { x: startX + offset, y: startY + offset };
+  const x = Math.max(0, (area.width - width) / 2) + offset;
+  const y = Math.max(8, (area.height - height) / 2) + offset;
+  // Never push the window past the right edge or under the dock
+  return {
+    x: Math.min(x, Math.max(0, area.width - width)),
+    y: Math.min(y, Math.max(0, area.height - height)),
+  };
 }
 
 function windowReducer(state, action) {
@@ -53,8 +77,10 @@ function windowReducer(state, action) {
     }
 
     case OPEN_WINDOW: {
-      const w = action.payload.w || DEFAULT_WIDTH;
-      const h = action.payload.h || DEFAULT_HEIGHT;
+      const { w, h } = fitSize(
+        action.payload.w || DEFAULT_WIDTH,
+        action.payload.h || DEFAULT_HEIGHT
+      );
 
       const existing = state.find((win) => win.id === action.payload.id);
       if (existing) {
@@ -117,6 +143,11 @@ function windowReducer(state, action) {
         w.id === action.payload.id
           ? { ...w, w: action.payload.w, h: action.payload.h }
           : w
+      );
+
+    case UPDATE_WINDOW:
+      return state.map((w) =>
+        w.id === action.payload.id ? { ...w, ...action.payload.changes } : w
       );
 
     case MAXIMIZE_WINDOW:
@@ -191,6 +222,12 @@ export function WindowProvider({ children }) {
     []
   );
 
+  // Patch title / fileId etc. (e.g. the image viewer paging to another image)
+  const updateWindow = useCallback(
+    (id, changes) => dispatch({ type: UPDATE_WINDOW, payload: { id, changes } }),
+    []
+  );
+
   const maximizeWindow = useCallback(
     (id) => dispatch({ type: MAXIMIZE_WINDOW, payload: { id } }),
     []
@@ -216,6 +253,7 @@ export function WindowProvider({ children }) {
         moveWindow,
         resizeWindow,
         maximizeWindow,
+        updateWindow,
       }}
     >
       {children}

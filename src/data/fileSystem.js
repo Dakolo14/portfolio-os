@@ -6,6 +6,31 @@
 // The folder icon updates automatically based on files.length.
 // Body text supports simple markdown: **bold**, # headings, [links](url),
 // and line breaks are preserved.
+//
+// FILE TYPES — the type is worked out from `youtube`/`src`/the name:
+//
+//   Text (opens in the reader):
+//     { id: "notes", name: "Notes.txt", title: "My notes", body: `# Hello...` }
+//
+//   Image (opens in the Image Viewer; ←/→ or swipe pages through every
+//   image in the same folder). Put the file in /public/media/:
+//     { id: "look-1", name: "Look 1.jpg", src: "/media/ss26/look-1.jpg",
+//       caption: "Optional caption", alt: "Optional description" }
+//
+//   Video — YouTube (preferred, keeps the site fast):
+//     { id: "recital", name: "Recital", youtube: "https://youtu.be/VIDEO_ID",
+//       caption: "Optional caption" }
+//
+//   Video — small local file (keep it a few MB, .mp4 or .webm):
+//     { id: "clip", name: "Clip.mp4", src: "/media/clip.mp4",
+//       poster: "/media/clip-poster.jpg" }
+//
+//   Optional on images/videos: `thumbnail` to use a smaller icon image.
+//
+// MEDIA INSIDE A WRITE-UP — put this on its own line in `body`:
+//     ![Caption](/media/ss26/look-1.jpg)        → image
+//     ![Caption](https://youtu.be/VIDEO_ID)    → YouTube player
+//     ![Caption](/media/clip.mp4)              → video player
 // ============================================================
 
 export const desktop = [

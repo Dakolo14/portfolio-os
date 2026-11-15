@@ -1,5 +1,25 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { desktop, owner } from "../data/fileSystem";
+import { useWindows } from "../state/windowManager";
+import { getFileType, openFile } from "../lib/media";
+
+const TYPE_ICON = { text: "📄", image: "🖼 ", video: "🎬" };
+
+// Finds a file by "folder/file", file id or file name (case-insensitive)
+function findFile(path) {
+  for (const folder of desktop) {
+    for (const file of folder.files) {
+      const candidates = [
+        `${folder.id}/${file.id}`,
+        `${folder.name.toLowerCase()}/${file.name.toLowerCase()}`,
+        file.id,
+        file.name.toLowerCase(),
+      ];
+      if (candidates.includes(path)) return { folder, file };
+    }
+  }
+  return null;
+}
 
 // ============================================================
 // Terminal — Easter egg terminal emulator
@@ -12,7 +32,8 @@ const HELP_TEXT = `Available commands:
   help      — Show this help message
   whoami    — Display user info
   ls        — List folders on the desktop
-  cat <file> — Read a file (use "ls" to see folders, then "cat folder/file")
+  cat <file> — Read a text file (use "ls" to see folders, then "cat folder/file")
+  open <file> — Open any file (text, image or video) in a window
   contact   — Show contact information
   neofetch  — System information
   clear     — Clear the terminal`;
@@ -34,6 +55,7 @@ const NEOFETCH = `
 `;
 
 export default function Terminal() {
+  const { openWindow } = useWindows();
   const [history, setHistory] = useState([
     {
       type: "output",
@@ -77,7 +99,7 @@ export default function Terminal() {
           break;
 
         case "ls": {
-          const target = parts[1];
+          const target = parts.slice(1).join(" ");
           if (target) {
             const folder = desktop.find(
               (f) => f.id === target || f.name.toLowerCase() === target
@@ -85,7 +107,7 @@ export default function Terminal() {
             if (folder) {
               output =
                 folder.files.length > 0
-                  ? folder.files.map((f) => `  📄 ${f.name}`).join("\n")
+                  ? folder.files.map((f) => `  ${TYPE_ICON[getFileType(f)]} ${f.name}`).join("\n")
                   : "  (empty folder)";
             } else {
               output = `ls: cannot access '${target}': No such folder`;
@@ -102,27 +124,29 @@ export default function Terminal() {
             output = "Usage: cat <folder/filename>";
             break;
           }
-          // Try to find the file
-          let found = false;
-          for (const folder of desktop) {
-            for (const file of folder.files) {
-              const fullPath = `${folder.id}/${file.id}`;
-              const namePath = `${folder.name.toLowerCase()}/${file.name.toLowerCase()}`;
-              if (
-                path === fullPath ||
-                path === namePath ||
-                path === file.id ||
-                path === file.name.toLowerCase()
-              ) {
-                output = `--- ${file.title} ---\n\n${file.body.replace(/[#*]/g, "")}`;
-                found = true;
-                break;
-              }
-            }
-            if (found) break;
-          }
-          if (!found) {
+          const hit = findFile(path);
+          if (!hit) {
             output = `cat: ${path}: No such file. Try "ls" to see available folders.`;
+          } else if (getFileType(hit.file) !== "text") {
+            openFile(openWindow, hit.folder, hit.file);
+            output = `cat: ${hit.file.name}: binary file — opened it in a viewer instead.`;
+          } else {
+            output = `--- ${hit.file.title || hit.file.name} ---\n\n${(hit.file.body || "").replace(/[#*]/g, "")}`;
+          }
+          break;
+        }
+
+        case "open":
+        case "xdg-open": {
+          const path = parts.slice(1).join(" ");
+          const hit = path && findFile(path);
+          if (!hit) {
+            output = path
+              ? `${command}: ${path}: No such file.`
+              : `Usage: ${command} <folder/filename>`;
+          } else {
+            openFile(openWindow, hit.folder, hit.file);
+            output = `Opening ${hit.file.name}...`;
           }
           break;
         }
@@ -149,7 +173,7 @@ export default function Terminal() {
         ...(output ? [{ type: "output", text: output }] : []),
       ]);
     },
-    []
+    [openWindow]
   );
 
   const handleKeyDown = (e) => {
