@@ -40,8 +40,17 @@ function getCascadePosition(windows, width, height) {
 
 function windowReducer(state, action) {
   switch (action.type) {
-    case HYDRATE:
-      return action.payload || [];
+    case HYDRATE: {
+      // Saved positions may come from a bigger screen; pull windows back
+      // into view so none are stranded off-screen after a reload.
+      const maxX = Math.max(0, window.innerWidth - 120);
+      const maxY = Math.max(0, window.innerHeight - 140);
+      return (action.payload || []).map((w) => ({
+        ...w,
+        x: Math.min(Math.max(0, w.x), maxX),
+        y: Math.min(Math.max(0, w.y), maxY),
+      }));
+    }
 
     case OPEN_WINDOW: {
       const w = action.payload.w || DEFAULT_WIDTH;
@@ -125,7 +134,7 @@ function loadWindows() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) return JSON.parse(saved);
-  } catch (e) { /* ignore */ }
+  } catch { /* ignore */ }
   return [];
 }
 
@@ -144,7 +153,7 @@ export function WindowProvider({ children }) {
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(windows));
-    } catch (e) { /* ignore */ }
+    } catch { /* ignore */ }
   }, [windows]);
 
   const openWindow = useCallback((payload) => {

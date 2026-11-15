@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { setSoundEnabled } from "../lib/sounds";
 
 // ============================================================
 // Theme Manager — Appearance, icon size, sound toggle
@@ -101,7 +102,7 @@ function loadSettings() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) return JSON.parse(saved);
-  } catch (e) { /* ignore */ }
+  } catch { /* ignore */ }
   return { themeId: "dark", iconSize: "medium", soundEnabled: true };
 }
 
@@ -141,11 +142,17 @@ export function ThemeProvider({ children }) {
     applyIconSizeToDOM(settings.iconSize);
   }, [theme, settings.iconSize]);
 
+  // Keep the sound module in sync (here, not in TopPanel, so the
+  // boot chime also respects a saved "muted" setting)
+  useEffect(() => {
+    setSoundEnabled(settings.soundEnabled);
+  }, [settings.soundEnabled]);
+
   // Persist
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-    } catch (e) { /* ignore */ }
+    } catch { /* ignore */ }
   }, [settings]);
 
   // Handle system preference

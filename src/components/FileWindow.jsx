@@ -12,6 +12,14 @@ function renderBody(body) {
   const elements = [];
   let inTable = false;
   let tableRows = [];
+  let inList = false;
+
+  const closeList = () => {
+    if (inList) {
+      elements.push("</ul>");
+      inList = false;
+    }
+  };
 
   const processInline = (text) => {
     // Bold: **text**
@@ -66,9 +74,9 @@ function renderBody(body) {
       flushTable();
     }
 
-    // Empty line = paragraph break
+    // Empty line ends a list; paragraphs already have their own spacing
     if (trimmed === "") {
-      elements.push("<br/>");
+      closeList();
       continue;
     }
 
@@ -82,18 +90,24 @@ function renderBody(body) {
       continue;
     }
 
-    // Unordered list
+    // Unordered list (consecutive "- " lines share one <ul>)
     if (trimmed.startsWith("- ")) {
+      if (!inList) {
+        elements.push("<ul>");
+        inList = true;
+      }
       elements.push(`<li>${processInline(trimmed.slice(2))}</li>`);
       continue;
     }
+    closeList();
 
     // Regular paragraph
     elements.push(`<p>${processInline(trimmed)}</p>`);
   }
 
-  // Flush any remaining table
+  // Flush any remaining table / list
   if (inTable) flushTable();
+  closeList();
 
   return elements.join("");
 }

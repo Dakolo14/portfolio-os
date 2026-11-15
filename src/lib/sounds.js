@@ -28,7 +28,7 @@ export function isSoundEnabled() {
 
 function guardedPlay(fn) {
   if (!_soundEnabled) return;
-  try { fn(); } catch (e) { /* silently ignore */ }
+  try { fn(); } catch { /* silently ignore */ }
 }
 
 export function playClick() {

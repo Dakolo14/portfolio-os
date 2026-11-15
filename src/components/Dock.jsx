@@ -119,7 +119,6 @@ export default function Dock() {
         <button
           className={`dock__item ${isWindowOpen("folder-worldwideadhd") ? "dock__item--active" : ""}`}
           onClick={() => {
-            playClick();
             const folder = desktop.find((f) => f.id === "worldwideadhd");
             if (folder) handleDockClick(folder);
           }}

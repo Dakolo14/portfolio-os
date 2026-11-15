@@ -121,12 +121,16 @@ export default function Window({ win, isMobile }) {
     );
   }
 
-  // Desktop: react-rnd window
-  const position = win.maximized
-    ? { x: 0, y: 32 }
-    : { x: win.x, y: win.y };
+  // Desktop: react-rnd window.
+  // Positions are relative to .window-layer, which already starts below the
+  // top panel, so a maximized window sits at y=0 and stops just above the dock.
+  const PANEL_HEIGHT = 28;
+  const dockTop =
+    document.querySelector(".dock")?.getBoundingClientRect().top ??
+    window.innerHeight;
+  const position = win.maximized ? { x: 0, y: 0 } : { x: win.x, y: win.y };
   const size = win.maximized
-    ? { width: window.innerWidth, height: window.innerHeight - 32 - 72 }
+    ? { width: window.innerWidth, height: Math.max(240, dockTop - PANEL_HEIGHT - 8) }
     : { width: win.w, height: win.h };
 
   return (
@@ -149,11 +153,15 @@ export default function Window({ win, isMobile }) {
         );
         moveWindow(win.id, pos.x, pos.y);
       }}
-      style={{ zIndex: win.z }}
-      onMouseDown={() => focusWindow(win.id)}
+      // react-rnd sets display:inline-block inline; the window needs flex so
+      // its content area gets a real height and can scroll.
+      style={{ zIndex: win.z, display: "flex" }}
+      onMouseDown={() => {
+        if (!isFocused) focusWindow(win.id);
+      }}
       className={`window ${isFocused ? "window--focused" : "window--unfocused"} ${isClosing ? "window--closing" : ""} ${isOpening ? "window--opening" : ""}`}
     >
-      <div className="window__titlebar">
+      <div className="window__titlebar" onDoubleClick={handleMaximize}>
         <WindowControls
           onClose={handleClose}
           onMinimize={handleMinimize}

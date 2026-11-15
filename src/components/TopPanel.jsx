@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import { owner } from "../data/fileSystem";
 import { useWindows } from "../state/windowManager";
 import { useTheme } from "../state/themeManager";
-import { setSoundEnabled } from "../lib/sounds";
 
 // ============================================================
 // TopPanel — GNOME-style top bar
@@ -14,11 +12,6 @@ export default function TopPanel() {
   const [time, setTime] = useState(new Date());
   const { openWindow } = useWindows();
   const { soundEnabled, toggleSound } = useTheme();
-
-  // Sync sound module with theme state
-  useEffect(() => {
-    setSoundEnabled(soundEnabled);
-  }, [soundEnabled]);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);

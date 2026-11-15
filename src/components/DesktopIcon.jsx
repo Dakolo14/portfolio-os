@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback } from "react";
 import Draggable from "react-draggable";
 import { getFolderIcon } from "../lib/getFolderIcon";
 import { useWindows } from "../state/windowManager";
@@ -15,14 +15,14 @@ function loadPositions() {
   try {
     const saved = localStorage.getItem(POSITIONS_KEY);
     if (saved) return JSON.parse(saved);
-  } catch (e) { /* ignore */ }
+  } catch { /* ignore */ }
   return {};
 }
 
 function savePositions(positions) {
   try {
     localStorage.setItem(POSITIONS_KEY, JSON.stringify(positions));
-  } catch (e) { /* ignore */ }
+  } catch { /* ignore */ }
 }
 
 export default function DesktopIcon({ folder, selected, onSelect, isMobile }) {
@@ -100,6 +100,24 @@ export default function DesktopIcon({ folder, selected, onSelect, isMobile }) {
     [dragged, folder, openWindow, isMobile]
   );
 
+  // Keyboard: Enter or Space opens the folder
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      e.preventDefault();
+      onSelect(folder.id);
+      openWindow({
+        id: `folder-${folder.id}`,
+        kind: "folder",
+        folderId: folder.id,
+        title: folder.name,
+        w: 550,
+        h: 400,
+      });
+    },
+    [folder, onSelect, openWindow]
+  );
+
   const icon = getFolderIcon(folder.files.length);
 
   // On mobile, don't use Draggable
@@ -108,10 +126,14 @@ export default function DesktopIcon({ folder, selected, onSelect, isMobile }) {
       <div
         className={`desktop-icon ${selected ? "desktop-icon--selected" : ""}`}
         onClick={handleClick}
+        role="button"
+        tabIndex={0}
+        aria-label={`Open ${folder.name} folder`}
+        onKeyDown={handleKeyDown}
       >
         <img
           src={icon}
-          alt={folder.name}
+          alt=""
           className="desktop-icon__img"
           draggable={false}
         />
@@ -134,10 +156,14 @@ export default function DesktopIcon({ folder, selected, onSelect, isMobile }) {
         className={`desktop-icon ${selected ? "desktop-icon--selected" : ""}`}
         onClick={handleClick}
         onDoubleClick={handleDoubleClick}
+        role="button"
+        tabIndex={0}
+        aria-label={`Open ${folder.name} folder`}
+        onKeyDown={handleKeyDown}
       >
         <img
           src={icon}
-          alt={folder.name}
+          alt=""
           className="desktop-icon__img"
           draggable={false}
         />
