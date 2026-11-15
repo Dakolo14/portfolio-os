@@ -1,10 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { getFileType } from "../lib/media";
 
-// ============================================================
-// ImageViewer — Eye-of-GNOME-style viewer that pages through
-// every image in the same folder (arrow keys, swipe, buttons)
-// ============================================================
 
 const SWIPE_MIN = 40;
 
@@ -30,13 +26,11 @@ export default function ImageViewer({ folder, fileId, onChange }) {
     [count]
   );
 
-  // Keep the window title in sync with the image on screen
   useEffect(() => {
     if (current && current.id !== fileId) onChange?.(current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current?.id]);
 
-  // Focus so arrow keys work straight away
   useEffect(() => {
     rootRef.current?.focus({ preventScroll: true });
   }, []);

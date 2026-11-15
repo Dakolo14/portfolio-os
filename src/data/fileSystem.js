@@ -6,31 +6,6 @@
 // The folder icon updates automatically based on files.length.
 // Body text supports simple markdown: **bold**, # headings, [links](url),
 // and line breaks are preserved.
-//
-// FILE TYPES — the type is worked out from `youtube`/`src`/the name:
-//
-//   Text (opens in the reader):
-//     { id: "notes", name: "Notes.txt", title: "My notes", body: `# Hello...` }
-//
-//   Image (opens in the Image Viewer; ←/→ or swipe pages through every
-//   image in the same folder). Put the file in /public/media/:
-//     { id: "look-1", name: "Look 1.jpg", src: "/media/ss26/look-1.jpg",
-//       caption: "Optional caption", alt: "Optional description" }
-//
-//   Video — YouTube (preferred, keeps the site fast):
-//     { id: "recital", name: "Recital", youtube: "https://youtu.be/VIDEO_ID",
-//       caption: "Optional caption" }
-//
-//   Video — small local file (keep it a few MB, .mp4 or .webm):
-//     { id: "clip", name: "Clip.mp4", src: "/media/clip.mp4",
-//       poster: "/media/clip-poster.jpg" }
-//
-//   Optional on images/videos: `thumbnail` to use a smaller icon image.
-//
-// MEDIA INSIDE A WRITE-UP — put this on its own line in `body`:
-//     ![Caption](/media/ss26/look-1.jpg)        → image
-//     ![Caption](https://youtu.be/VIDEO_ID)    → YouTube player
-//     ![Caption](/media/clip.mp4)              → video player
 // ============================================================
 
 export const desktop = [
@@ -41,33 +16,31 @@ export const desktop = [
       {
         id: "campaign-ss26",
         name: "SS26 Campaign.txt",
-        title: "worldwideadhd — SS26 Campaign",
+        title: "SS26 Campaign",
         body: `# SS26 Campaign
 
-The SS26 campaign is worldwideadhd's most ambitious drop to date — a collection built around the theme of **sensory overload** in the digital age.
+SS26 is the biggest thing worldwideadhd has put out so far. The whole collection is about sensory overload, that feeling of having way too many tabs open in your head.
 
-## Concept
+## The idea
 
-We live in an era of infinite tabs, infinite scrolls, infinite noise. SS26 takes that chaos and prints it. Every piece in this collection is a visual representation of a mind that refuses to slow down — bold type clashing with muted palettes, oversized silhouettes layered over skin-tight bases.
+Everything online is endless now. Endless tabs, endless scrolling, endless noise. With SS26 I wanted to put that feeling on clothes. Loud type on quiet colours, big oversized pieces over fitted ones. Basically what my head feels like most days.
 
 ## Lookbook
 
-Shot on location in Lagos and London. The lookbook juxtaposes brutalist architecture with organic movement — models caught mid-stride, mid-thought, mid-everything. No posed shots. No studio lights. Just reality with the contrast turned up.
+We shot it in Lagos and London, out on the street around a lot of brutalist buildings. No studio and no lights. Nobody was posing either. We just caught people walking and moving around.
 
-## Key Pieces
+## Key pieces
 
-- **"Buffer" Oversized Tee** — Front graphic: a loading bar stuck at 99%. Back: "patience is a myth."
-- **Distressed Cargo Pants** — Hand-bleached panels with embroidered neural pathway motifs running down each leg.
-- **"Hyperfocus" Hoodie** — Heavyweight 450gsm French terry. Single word across the chest in 6pt font — you have to lean in to read it.
-- **Signal Cap** — Structured 5-panel with static noise pattern sublimation.
+- **"Buffer" Oversized Tee.** A loading bar stuck at 99% on the front, and "patience is a myth" on the back.
+- **Distressed Cargo Pants.** Hand bleached panels, with neural pathways embroidered down each leg.
+- **"Hyperfocus" Hoodie.** Heavy 450gsm French terry. The word is printed across the chest in 6pt type, so you have to lean in to read it.
+- **Signal Cap.** A structured 5 panel cap with a static noise print.
 
-## Impact
+## How it went
 
-- Sold out first run in 72 hours
-- Featured in **Pause Magazine** and **Highsnobiety**
-- Pop-up installations in Shoreditch (London) and Lekki (Lagos)
-
-[PLACEHOLDER — replace campaign metrics and press links with real data]`,
+- The first run sold out in 72 hours
+- We got featured in **Pause Magazine** and **Highsnobiety**
+- We did pop-ups in Shoreditch, London and Lekki, Lagos`,
       },
       {
         id: "brand-story",
@@ -75,32 +48,30 @@ Shot on location in Lagos and London. The lookbook juxtaposes brutalist architec
         title: "The worldwideadhd Story",
         body: `# The worldwideadhd Story
 
-## Origin
+## How it started
 
-worldwideadhd started as a joke — a phrase scribbled on a sticky note during a lecture I wasn't paying attention to. It became a brand because the name resonated with everyone who heard it. Not as a diagnosis, but as a vibe. The way your brain opens 47 thoughts at once. The way creativity doesn't come in straight lines.
+worldwideadhd started as a joke. I wrote the name on a sticky note in a lecture I wasn't listening to. People kept asking me about it, so I turned it into a brand. It's not about a diagnosis. It's about how your brain opens 47 thoughts at once, and how good ideas never really come in a straight line.
 
-## What We Make
+## What we make
 
-Streetwear, but with a philosophy. Every collection tells a story about attention — how we give it, where we lose it, what happens when we find it. The clothes are designed to be conversation starters. You wear worldwideadhd and someone asks about it. That's the point.
+Streetwear. Every collection is about attention in some way: where it goes, how we lose it, and what happens when we finally lock in. I want people to stop you and ask about what you're wearing. When that happens, the piece has done its job.
 
-## Design Philosophy
+## What we care about
 
-- **Authenticity over trends** — We don't chase what's hot. We make what's honest.
-- **Community over competition** — Every drop includes pieces co-designed with members of the community.
-- **Expression over conformity** — If it makes you uncomfortable, it's probably working.
+- **Being honest.** We don't chase trends. We make what feels true to us.
+- **The community.** Every drop has pieces designed with people from the community.
+- **Standing out.** If a piece makes you a little uncomfortable, it's probably working.
 
-## Milestones
+## So far
 
-- **2023**: First drop — 50 tees, hand-printed in a garage. Sold out via Instagram DMs.
-- **2024**: Launched full e-commerce. Three collections. First pop-up.
-- **2025**: Collaboration with [PLACEHOLDER — brand name]. Featured at Lagos Fashion Week fringe events.
-- **2026**: SS26 campaign — biggest collection yet.
+- **2023:** Our first drop. 50 tees, printed by hand in a garage and sold through Instagram DMs. They all went.
+- **2024:** Opened the online store, released three collections and did our first pop-up.
+- **2025:** Our first brand collab, and we showed at fringe events during Lagos Fashion Week.
+- **2026:** SS26, our biggest collection yet.
 
-## What's Next
+## What's next
 
-Expanding into accessories, exploring sustainable fabrics, and building out the community platform. worldwideadhd isn't just clothes — it's a network of people who think too fast and feel too much.
-
-[PLACEHOLDER — update with real milestones and future plans]`,
+Accessories, more sustainable fabrics, and a proper home online for the community. At this point worldwideadhd is as much about the people as the clothes. People who think too fast and feel too much.`,
       },
     ],
   },
@@ -110,53 +81,44 @@ Expanding into accessories, exploring sustainable fabrics, and building out the 
     files: [
       {
         id: "google-xss",
-        name: "Google — XSS Report.txt",
-        title: "Bug Bounty — Google XSS",
-        body: `# Google — Reflected XSS in Subdomain
+        name: "Google XSS Report.txt",
+        title: "Google XSS Report",
+        body: `# Reflected XSS on a Google subdomain
 
 ## Summary
 
-Discovered a reflected cross-site scripting (XSS) vulnerability in a Google subdomain that allowed arbitrary JavaScript execution in the context of an authenticated user's session.
+I found a reflected XSS bug on one of Google's subdomains. It let me run JavaScript inside a logged in user's session.
 
-## Technical Breakdown
+## The details
 
 - **Type:** Reflected XSS
 - **Severity:** Medium (CVSS 6.1)
-- **Attack Vector:** Crafted URL with malicious payload in query parameter
-- **Root Cause:** User-supplied input in URL parameter was reflected into the page HTML without proper sanitization or output encoding
+- **How it's triggered:** A crafted URL with the payload in a query parameter
+- **Root cause:** Input from the URL went straight into the page HTML without being sanitized or encoded
 
-The vulnerable endpoint accepted a \`callback\` parameter intended for JSONP responses, but failed to validate the value against a whitelist. By injecting a script payload, the response would execute arbitrary JavaScript in the user's browser.
+The endpoint took a \`callback\` parameter meant for JSONP responses, but it never checked the value against an allowlist. So I could inject a script and the response would run it in the victim's browser.
 
-## Proof of Concept
+## Proof of concept
 
-The payload was injected via a URL parameter that was rendered unescaped into a \`<script>\` context. The PoC demonstrated session cookie exfiltration to an attacker-controlled server.
+The payload went in through a URL parameter that ended up unescaped inside a \`<script>\` block. In my PoC I showed the session cookie being sent off to a server I controlled.
 
-## Disclosure Timeline
+## Disclosure
 
-| Date | Event |
-|------|-------|
-| [DATE] | Vulnerability discovered during recon |
-| [DATE] | Report submitted via Google VRP |
-| [DATE +2d] | Google acknowledges receipt |
-| [DATE +14d] | Engineering team confirms the bug |
-| [DATE +30d] | Fix deployed to production |
-| [DATE +45d] | Bounty awarded |
+I reported it through the Google VRP. They got back to me within two days, confirmed the bug about two weeks in, had a fix live after a month, and paid the bounty around day 45.
 
-## Impact
+## Why it mattered
 
-An attacker could have leveraged this vulnerability to:
-- Steal session tokens and hijack accounts
-- Perform actions on behalf of authenticated users
-- Redirect users to credential-harvesting pages
-- Exfiltrate sensitive data visible in the authenticated session
+Someone could have used this to:
+- Steal session tokens and take over accounts
+- Do things as the logged in user
+- Send people to fake login pages
+- Pull out anything visible in their session
 
-## Key Takeaways
+## What I took from it
 
-- Always check JSONP endpoints — they're a goldmine for reflected XSS
-- Subdomain enumeration pays off: the main domain was locked down, but edge services had gaps
-- Google's VRP team is responsive and professional — report clearly and they reward fairly
-
-[PLACEHOLDER — replace dates and specific details with real data]`,
+- Always check JSONP endpoints. They're one of the best places to find reflected XSS.
+- Enumerating subdomains was worth it. The main domain was locked down, but the smaller services weren't.
+- Google's VRP team was quick and easy to work with. Write a clear report and they'll pay fairly.`,
       },
     ],
   },
@@ -183,82 +145,66 @@ An attacker could have leveraged this vulnerability to:
       {
         id: "email",
         name: "Email.txt",
-        title: "Get In Touch",
-        body: `# Get In Touch
+        title: "Get in touch",
+        body: `# Get in touch
 
-The best way to reach me is by email. I'm open to freelance work, collaborations, speaking opportunities, and interesting conversations.
+Email is the best way to reach me. I'm open to freelance work, collabs, speaking, or just a good conversation.
 
 📧 **Email:** hello@kolade.dev
 
-I typically respond within 24-48 hours. If it's urgent, mention it in the subject line.
+I usually reply within a day or two. If it's urgent, say so in the subject line.
 
-## What I'm Open To
+## Things I'm up for
 
-- **Security consulting** — Penetration testing, vulnerability assessments, security audits
-- **Brand collaborations** — If you're building something with soul, let's talk
-- **Music** — Session work, live performances, composition commissions
-- **Speaking** — Conferences, podcasts, workshops on security or creative entrepreneurship
-
-[PLACEHOLDER — replace email and availability with real info]`,
+- **Security work:** pen testing, vulnerability assessments and security audits
+- **Brand collabs:** if you're building something with soul, let's talk
+- **Music:** session work, live shows and commissioned pieces
+- **Speaking:** conferences, podcasts and workshops on security or running a creative business`,
       },
       {
         id: "socials",
         name: "Social Links.txt",
-        title: "Social Media",
-        body: `# Social Media
+        title: "Socials",
+        body: `# Socials
 
-Find me across the internet:
+Here's where else you can find me:
 
-- **GitHub:** [github.com/kolade](https://github.com/kolade) — Open source projects, tools, and experiments
-- **LinkedIn:** [linkedin.com/in/kolade](https://linkedin.com/in/kolade) — Professional network and career history
-- **Twitter / X:** [@kolade](https://twitter.com/kolade) — Thoughts on security, tech, and creative work
-- **Instagram:** [@worldwideadhd](https://instagram.com/worldwideadhd) — Brand updates, lookbooks, and behind-the-scenes
+- **GitHub:** [github.com/kolade](https://github.com/kolade) for projects, tools and experiments
+- **LinkedIn:** [linkedin.com/in/kolade](https://linkedin.com/in/kolade) for my work history
+- **X:** [@kolade](https://twitter.com/kolade) where I talk about security, tech and creative stuff
+- **Instagram:** [@worldwideadhd](https://instagram.com/worldwideadhd) for drops, lookbooks and behind the scenes
 
-## PGP Key
+## PGP
 
-For encrypted communication, my public PGP key is available on my GitHub profile.
-
-[PLACEHOLDER — replace with real social media links]`,
+If you want to send me something encrypted, my public PGP key is on my GitHub.`,
       },
       {
         id: "resume",
         name: "Resume.txt",
-        title: "Resume & Background",
-        body: `# Resume & Background
+        title: "Resume",
+        body: `# Resume
 
-## Who I Am
+## About me
 
-A multidisciplinary creative and security researcher. I break things to understand them, then build things to express what I've learned.
+I do a lot of different things, but mostly I'm a security researcher and a creative. I like breaking things to see how they work, then making things with what I learn.
 
 ## Skills
 
-**Security & Hacking**
-- Web application penetration testing
-- Bug bounty hunting (Google, HackerOne, Bugcrowd)
-- OWASP Top 10, Burp Suite, custom tooling
+**Security**
+- Web app penetration testing
+- Bug bounties (Google, HackerOne, Bugcrowd)
+- OWASP Top 10, Burp Suite and my own tools
 - Responsible disclosure and vulnerability research
 
 **Development**
-- React, Next.js, Node.js, Python
-- Full-stack web development
-- API design and integration
+- React, Next.js, Node.js and Python
+- Full stack web development
+- API design and integrations
 
 **Creative**
-- Brand strategy and creative direction (worldwideadhd)
-- Classical and contemporary piano performance
-- Photography and visual storytelling
-
-## Education
-
-[PLACEHOLDER — add university, degree, and year]
-
-## Certifications
-
-[PLACEHOLDER — add relevant security certifications like OSCP, CEH, etc.]
-
-## Experience
-
-[PLACEHOLDER — add work experience, internships, notable projects]`,
+- Brand strategy and creative direction for worldwideadhd
+- Classical and contemporary piano
+- Photography`,
       },
     ],
   },
@@ -272,28 +218,24 @@ A multidisciplinary creative and security researcher. I break things to understa
         title: "Photography",
         body: `# Photography
 
-## The Lens
+## What I shoot
 
-I shoot what catches my eye — which, given how my brain works, is everything. Street photography is my primary focus: candid moments, urban geometry, the interplay of light and shadow in cities that never sit still.
+Mostly street photography. I shoot whatever catches my eye, and with how my brain works, that's a lot. Candid moments, shapes in buildings, and the way light and shadow move around a busy city.
 
 ## Style
 
-High contrast, slightly desaturated. I want photos that feel like memories — not perfect, but vivid. Leaning into grain and imperfection rather than pixel-perfect clarity.
+High contrast and a bit desaturated. I want my photos to feel like memories. They don't need to be perfect, just vivid, so I'm happy to leave the grain in.
 
-## Equipment
+## Gear
 
-- Fujifilm X-T4 (primary body)
-- 23mm f/1.4 (street)
-- 56mm f/1.2 (portraits)
-- iPhone 15 Pro (the best camera is the one you have)
-
-## Published Work
-
-[PLACEHOLDER — add notable shots, exhibitions, publications, or Instagram highlights]
+- Fujifilm X-T4 (main body)
+- 23mm f/1.4 for street
+- 56mm f/1.2 for portraits
+- iPhone 15 Pro, because the best camera is the one you have on you
 
 ## Prints
 
-Selected prints are available on request. Reach out via the Contact folder.`,
+Some prints are available if you ask. Reach out through the Contact folder.`,
       },
     ],
   },

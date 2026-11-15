@@ -100,7 +100,6 @@ export default function DesktopIcon({ folder, selected, onSelect, isMobile }) {
     [dragged, folder, openWindow, isMobile]
   );
 
-  // Keyboard: Enter or Space opens the folder
   const handleKeyDown = useCallback(
     (e) => {
       if (e.key !== "Enter" && e.key !== " ") return;

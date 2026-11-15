@@ -29,7 +29,6 @@ const DocumentIcon = () => (
   </svg>
 );
 
-// Thumbnail for image and video files (Nautilus-style)
 function MediaThumb({ file, type }) {
   const [failed, setFailed] = useState(false);
   const ytId = type === "video" ? getYouTubeId(file.youtube || file.src) : null;

@@ -5,7 +5,6 @@ import { getFileType, openFile } from "../lib/media";
 
 const TYPE_ICON = { text: "📄", image: "🖼 ", video: "🎬" };
 
-// Finds a file by "folder/file", file id or file name (case-insensitive)
 function findFile(path) {
   for (const folder of desktop) {
     for (const file of folder.files) {
@@ -29,14 +28,14 @@ function findFile(path) {
 const PROMPT = `${owner.username}@${owner.hostname}:~$ `;
 
 const HELP_TEXT = `Available commands:
-  help      — Show this help message
-  whoami    — Display user info
-  ls        — List folders on the desktop
-  cat <file> — Read a text file (use "ls" to see folders, then "cat folder/file")
-  open <file> — Open any file (text, image or video) in a window
-  contact   — Show contact information
-  neofetch  — System information
-  clear     — Clear the terminal`;
+  help         Show this help message
+  whoami       Display user info
+  ls           List folders on the desktop
+  cat <file>   Read a text file (use "ls" to see folders, then "cat folder/file")
+  open <file>  Open any file (text, image or video) in a window
+  contact      Show contact information
+  neofetch     System information
+  clear        Clear the terminal`;
 
 const NEOFETCH = `
   ██╗  ██╗ ██████╗ ██╗      █████╗ ██████╗ ███████╗
@@ -129,7 +128,7 @@ export default function Terminal() {
             output = `cat: ${path}: No such file. Try "ls" to see available folders.`;
           } else if (getFileType(hit.file) !== "text") {
             openFile(openWindow, hit.folder, hit.file);
-            output = `cat: ${hit.file.name}: binary file — opened it in a viewer instead.`;
+            output = `cat: ${hit.file.name}: not a text file, so I opened it in a viewer instead.`;
           } else {
             output = `--- ${hit.file.title || hit.file.name} ---\n\n${(hit.file.body || "").replace(/[#*]/g, "")}`;
           }
@@ -152,7 +151,7 @@ export default function Terminal() {
         }
 
         case "contact":
-          output = `📧 Email: ${owner.email}\n🌐 Website: kolade.dev\n\n[PLACEHOLDER — add real contact links]`;
+          output = `📧 Email: ${owner.email}\n🌐 Website: kolade.dev`;
           break;
 
         case "neofetch":

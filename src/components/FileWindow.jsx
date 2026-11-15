@@ -2,9 +2,7 @@
 // FileWindow — Displays a file's write-up content
 // ============================================================
 // Renders basic markdown-like formatting: headings, bold,
-// links, lists, tables, and media lines. A line that is only
-//   ![caption](url)
-// becomes an image, a local video (.mp4/.webm) or a YouTube embed.
+// links, lists, tables, and preserves line breaks.
 
 import { getYouTubeId, youTubeEmbedUrl, isMediaSrcVideo } from "../lib/media";
 
@@ -93,13 +91,11 @@ function renderBody(body) {
       flushTable();
     }
 
-    // Empty line ends a list; paragraphs already have their own spacing
     if (trimmed === "") {
       closeList();
       continue;
     }
 
-    // Media line: ![caption](url)
     const media = trimmed.match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
     if (media) {
       closeList();
@@ -117,7 +113,6 @@ function renderBody(body) {
       continue;
     }
 
-    // Unordered list (consecutive "- " lines share one <ul>)
     if (trimmed.startsWith("- ")) {
       if (!inList) {
         elements.push("<ul>");
@@ -132,7 +127,6 @@ function renderBody(body) {
     elements.push(`<p>${processInline(trimmed)}</p>`);
   }
 
-  // Flush any remaining table / list
   if (inTable) flushTable();
   closeList();
 

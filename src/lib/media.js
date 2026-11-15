@@ -1,6 +1,3 @@
-// ============================================================
-// media.js — File types, YouTube helpers, and a shared "open file"
-// ============================================================
 
 const IMAGE_EXT = ["jpg", "jpeg", "png", "gif", "webp", "avif", "svg"];
 const VIDEO_EXT = ["mp4", "webm", "mov", "m4v"];
@@ -11,7 +8,6 @@ function extOf(path = "") {
   return dot === -1 ? "" : clean.slice(dot + 1).toLowerCase();
 }
 
-/** Returns the YouTube video id for a youtube.com / youtu.be URL, else null. */
 export function getYouTubeId(url = "") {
   const m = String(url).match(
     /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/
@@ -27,11 +23,6 @@ export function youTubeThumbUrl(id) {
   return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 }
 
-/**
- * Works out what kind of file this is: "image", "video" or "text".
- * An explicit `type` wins; otherwise we look at `youtube`, then the
- * extension of `src`, then the extension of the file name.
- */
 export function getFileType(file) {
   if (!file) return "text";
   if (file.type) return file.type;
@@ -46,7 +37,6 @@ export function isMediaSrcVideo(src) {
   return Boolean(getYouTubeId(src)) || VIDEO_EXT.includes(extOf(src));
 }
 
-/** Opens the right kind of window for a file inside a folder. */
 export function openFile(openWindow, folder, file) {
   const type = getFileType(file);
   const base = {

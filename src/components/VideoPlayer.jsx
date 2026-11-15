@@ -1,8 +1,5 @@
 import { getYouTubeId, youTubeEmbedUrl } from "../lib/media";
 
-// ============================================================
-// VideoPlayer — YouTube embeds (preferred) or small local files
-// ============================================================
 
 export default function VideoPlayer({ file }) {
   if (!file) {

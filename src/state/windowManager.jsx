@@ -29,8 +29,6 @@ function getNextZ(windows) {
   return Math.max(...windows.map((w) => w.z)) + 1;
 }
 
-// Space windows can use: below the top panel and above the dock.
-// Positions are relative to .window-layer (which starts under the panel).
 const PANEL_HEIGHT = 28;
 const DOCK_RESERVE = 124;
 
@@ -40,7 +38,6 @@ function getWorkArea() {
   return { width: screenW, height: Math.max(240, screenH - PANEL_HEIGHT - DOCK_RESERVE) };
 }
 
-// Shrinks a requested size so it fits the work area
 function fitSize(w, h) {
   const area = getWorkArea();
   return {
@@ -55,7 +52,6 @@ function getCascadePosition(windows, width, height) {
   const offset = (openCount % 8) * CASCADE_OFFSET;
   const x = Math.max(0, (area.width - width) / 2) + offset;
   const y = Math.max(8, (area.height - height) / 2) + offset;
-  // Never push the window past the right edge or under the dock
   return {
     x: Math.min(x, Math.max(0, area.width - width)),
     y: Math.min(y, Math.max(0, area.height - height)),
@@ -65,8 +61,6 @@ function getCascadePosition(windows, width, height) {
 function windowReducer(state, action) {
   switch (action.type) {
     case HYDRATE: {
-      // Saved positions may come from a bigger screen; pull windows back
-      // into view so none are stranded off-screen after a reload.
       const maxX = Math.max(0, window.innerWidth - 120);
       const maxY = Math.max(0, window.innerHeight - 140);
       return (action.payload || []).map((w) => ({
@@ -222,7 +216,6 @@ export function WindowProvider({ children }) {
     []
   );
 
-  // Patch title / fileId etc. (e.g. the image viewer paging to another image)
   const updateWindow = useCallback(
     (id, changes) => dispatch({ type: UPDATE_WINDOW, payload: { id, changes } }),
     []
