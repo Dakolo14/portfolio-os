@@ -167,47 +167,6 @@ export const desktop = [
     name: "Bug Bounty",
     files: [
       {
-        id: "google-xss",
-        name: "Google XSS Report.txt",
-        title: "Google XSS Report",
-        body: `# Reflected XSS on a Google subdomain
-
-## Summary
-
-I found a reflected XSS bug on one of Google's subdomains. It let me run JavaScript inside a logged in user's session.
-
-## The details
-
-- **Type:** Reflected XSS
-- **Severity:** Medium (CVSS 6.1)
-- **How it's triggered:** A crafted URL with the payload in a query parameter
-- **Root cause:** Input from the URL went straight into the page HTML without being sanitized or encoded
-
-The endpoint took a \`callback\` parameter meant for JSONP responses, but it never checked the value against an allowlist. So I could inject a script and the response would run it in the victim's browser.
-
-## Proof of concept
-
-The payload went in through a URL parameter that ended up unescaped inside a \`<script>\` block. In my PoC I showed the session cookie being sent off to a server I controlled.
-
-## Disclosure
-
-I reported it through the Google VRP. They got back to me within two days, confirmed the bug about two weeks in, had a fix live after a month, and paid the bounty around day 45.
-
-## Why it mattered
-
-Someone could have used this to:
-- Steal session tokens and take over accounts
-- Do things as the logged in user
-- Send people to fake login pages
-- Pull out anything visible in their session
-
-## What I took from it
-
-- Always check JSONP endpoints. They're one of the best places to find reflected XSS.
-- Enumerating subdomains was worth it. The main domain was locked down, but the smaller services weren't.
-- Google's VRP team was quick and easy to work with. Write a clear report and they'll pay fairly.`,
-      },
-      {
         id: "cert-ceh",
         name: "CEH Certificate.webp",
         title: "Certified Ethical Hacker (EC-Council)",
