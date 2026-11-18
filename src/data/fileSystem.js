@@ -10,8 +10,8 @@
 
 export const desktop = [
   {
-    id: "worldwideadhd",
-    name: "worldwideadhd",
+    id: "worldwideADHD",
+    name: "worldwideADHD",
     files: [
       {
         id: "campaign-ss26",
@@ -19,7 +19,7 @@ export const desktop = [
         title: "SS26 Campaign",
         body: `# SS26 Campaign
 
-SS26 is the biggest thing worldwideadhd has put out so far. The whole collection is about sensory overload, that feeling of having way too many tabs open in your head.
+SS26 is the biggest thing worldwideADHD has put out so far. The whole collection is about sensory overload, that feeling of having way too many tabs open in your head.
 
 ## The idea
 
@@ -45,12 +45,12 @@ We shot it in Lagos and London, out on the street around a lot of brutalist buil
       {
         id: "brand-story",
         name: "Brand Story.txt",
-        title: "The worldwideadhd Story",
-        body: `# The worldwideadhd Story
+        title: "The worldwideADHD Story",
+        body: `# The worldwideADHD Story
 
 ## How it started
 
-worldwideadhd started as a joke. I wrote the name on a sticky note in a lecture I wasn't listening to. People kept asking me about it, so I turned it into a brand. It's not about a diagnosis. It's about how your brain opens 47 thoughts at once, and how good ideas never really come in a straight line.
+worldwideADHD started as a joke. I wrote the name on a sticky note in a lecture I wasn't listening to. People kept asking me about it, so I turned it into a brand. It's not about a diagnosis. It's about how your brain opens 47 thoughts at once, and how good ideas never really come in a straight line.
 
 ## What we make
 
@@ -71,7 +71,154 @@ Streetwear. Every collection is about attention in some way: where it goes, how 
 
 ## What's next
 
-Accessories, more sustainable fabrics, and a proper home online for the community. At this point worldwideadhd is as much about the people as the clothes. People who think too fast and feel too much.`,
+Accessories, more sustainable fabrics, and a proper home online for the community. At this point worldwideADHD is as much about the people as the clothes. People who think too fast and feel too much.`,
+      },
+      {
+        id: "kaleidoessence-01",
+        name: "KaleidoESSENCE 01.webp",
+        title: "KaleidoESSENCE pt.1, page 1",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 1 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-01.webp",
+      },
+      {
+        id: "kaleidoessence-02",
+        name: "KaleidoESSENCE 02.webp",
+        title: "KaleidoESSENCE pt.1, page 2",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 2 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-02.webp",
+      },
+      {
+        id: "kaleidoessence-03",
+        name: "KaleidoESSENCE 03.webp",
+        title: "KaleidoESSENCE pt.1, page 3",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 3 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-03.webp",
+      },
+      {
+        id: "kaleidoessence-04",
+        name: "KaleidoESSENCE 04.webp",
+        title: "KaleidoESSENCE pt.1, page 4",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 4 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-04.webp",
+      },
+      {
+        id: "kaleidoessence-05",
+        name: "KaleidoESSENCE 05.webp",
+        title: "KaleidoESSENCE pt.1, page 5",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 5 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-05.webp",
+      },
+      {
+        id: "kaleidoessence-06",
+        name: "KaleidoESSENCE 06.webp",
+        title: "KaleidoESSENCE pt.1, page 6",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 6 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-06.webp",
+      },
+      {
+        id: "kaleidoessence-07",
+        name: "KaleidoESSENCE 07.webp",
+        title: "KaleidoESSENCE pt.1, page 7",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 7 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-07.webp",
+      },
+      {
+        id: "kaleidoessence-08",
+        name: "KaleidoESSENCE 08.webp",
+        title: "KaleidoESSENCE pt.1, page 8",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 8 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-08.webp",
+      },
+      {
+        id: "kaleidoessence-09",
+        name: "KaleidoESSENCE 09.webp",
+        title: "KaleidoESSENCE pt.1, page 9",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 9 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-09.webp",
+      },
+      {
+        id: "kaleidoessence-10",
+        name: "KaleidoESSENCE 10.webp",
+        title: "KaleidoESSENCE pt.1, page 10",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 10 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-10.webp",
+      },
+      {
+        id: "kaleidoessence-11",
+        name: "KaleidoESSENCE 11.webp",
+        title: "KaleidoESSENCE pt.1, page 11",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 11 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-11.webp",
+      },
+      {
+        id: "kaleidoessence-12",
+        name: "KaleidoESSENCE 12.webp",
+        title: "KaleidoESSENCE pt.1, page 12",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 12 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-12.webp",
+      },
+      {
+        id: "kaleidoessence-13",
+        name: "KaleidoESSENCE 13.webp",
+        title: "KaleidoESSENCE pt.1, page 13",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 13 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-13.webp",
+      },
+      {
+        id: "kaleidoessence-14",
+        name: "KaleidoESSENCE 14.webp",
+        title: "KaleidoESSENCE pt.1, page 14",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 14 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-14.webp",
+      },
+      {
+        id: "kaleidoessence-15",
+        name: "KaleidoESSENCE 15.webp",
+        title: "KaleidoESSENCE pt.1, page 15",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 15 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-15.webp",
+      },
+      {
+        id: "kaleidoessence-16",
+        name: "KaleidoESSENCE 16.webp",
+        title: "KaleidoESSENCE pt.1, page 16",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 16 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-16.webp",
+      },
+      {
+        id: "kaleidoessence-17",
+        name: "KaleidoESSENCE 17.webp",
+        title: "KaleidoESSENCE pt.1, page 17",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 17 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-17.webp",
+      },
+      {
+        id: "kaleidoessence-18",
+        name: "KaleidoESSENCE 18.webp",
+        title: "KaleidoESSENCE pt.1, page 18",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 18 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-18.webp",
+      },
+      {
+        id: "kaleidoessence-19",
+        name: "KaleidoESSENCE 19.webp",
+        title: "KaleidoESSENCE pt.1, page 19",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 19 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-19.webp",
+      },
+      {
+        id: "kaleidoessence-20",
+        name: "KaleidoESSENCE 20.webp",
+        title: "KaleidoESSENCE pt.1, page 20",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 20 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-20.webp",
+      },
+      {
+        id: "kaleidoessence-21",
+        name: "KaleidoESSENCE 21.webp",
+        title: "KaleidoESSENCE pt.1, page 21",
+        alt: "KaleidoESSENCE pt.1 lookbook by worldwideADHD, page 21 of 21",
+        src: "/media/worldwideADHD/kaleidoessence-21.webp",
       },
     ],
   },
@@ -119,6 +266,34 @@ Someone could have used this to:
 - Always check JSONP endpoints. They're one of the best places to find reflected XSS.
 - Enumerating subdomains was worth it. The main domain was locked down, but the smaller services weren't.
 - Google's VRP team was quick and easy to work with. Write a clear report and they'll pay fairly.`,
+      },
+      {
+        id: "cert-ceh",
+        name: "CEH Certificate.webp",
+        title: "Certified Ethical Hacker (EC-Council)",
+        alt: "Certified Ethical Hacker (EC-Council) certificate for Olukolade Daramola",
+        src: "/media/bug-bounty/ceh-certificate.webp",
+      },
+      {
+        id: "cert-security-plus",
+        name: "Security+ Certificate.webp",
+        title: "CompTIA Security+ ce",
+        alt: "CompTIA Security+ ce certificate for Olukolade Daramola",
+        src: "/media/bug-bounty/security-plus-certificate.webp",
+      },
+      {
+        id: "cert-cysa-plus",
+        name: "CySA+ Certificate.webp",
+        title: "CompTIA CySA+ ce",
+        alt: "CompTIA CySA+ ce certificate for Olukolade Daramola",
+        src: "/media/bug-bounty/cysa-plus-certificate.webp",
+      },
+      {
+        id: "cert-isc2-cc",
+        name: "ISC2 CC Certificate.webp",
+        title: "ISC2 Certified in Cybersecurity",
+        alt: "ISC2 Certified in Cybersecurity certificate for Olukolade Daramola",
+        src: "/media/bug-bounty/isc2-cc-certificate.webp",
       },
     ],
   },
@@ -202,7 +377,7 @@ I do a lot of different things, but mostly I'm a security researcher and a creat
 - API design and integrations
 
 **Creative**
-- Brand strategy and creative direction for worldwideadhd
+- Brand strategy and creative direction for worldwideADHD
 - Classical and contemporary piano
 - Photography`,
       },
@@ -246,6 +421,6 @@ export const owner = {
   name: "Kolade",
   username: "kolade",
   hostname: "portfolio",
-  bio: "Security researcher, pianist, creative director, and builder of worldwideadhd.",
+  bio: "Security researcher, pianist, creative director, and builder of worldwideADHD.",
   email: "hello@kolade.dev",
 };

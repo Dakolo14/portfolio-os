@@ -44,10 +44,10 @@ export default function TopPanel() {
       });
     } else if (action === "portfolio") {
       openWindow({
-        id: "folder-worldwideadhd",
+        id: "folder-worldwideADHD",
         kind: "folder",
-        folderId: "worldwideadhd",
-        title: "worldwideadhd",
+        folderId: "worldwideADHD",
+        title: "worldwideADHD",
         w: 550,
         h: 400,
       });
