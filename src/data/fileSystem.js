@@ -14,66 +14,6 @@ export const desktop = [
     name: "worldwideADHD",
     files: [
       {
-        id: "campaign-ss26",
-        name: "SS26 Campaign.txt",
-        title: "SS26 Campaign",
-        body: `# SS26 Campaign
-
-SS26 is the biggest thing worldwideADHD has put out so far. The whole collection is about sensory overload, that feeling of having way too many tabs open in your head.
-
-## The idea
-
-Everything online is endless now. Endless tabs, endless scrolling, endless noise. With SS26 I wanted to put that feeling on clothes. Loud type on quiet colours, big oversized pieces over fitted ones. Basically what my head feels like most days.
-
-## Lookbook
-
-We shot it in Lagos and London, out on the street around a lot of brutalist buildings. No studio and no lights. Nobody was posing either. We just caught people walking and moving around.
-
-## Key pieces
-
-- **"Buffer" Oversized Tee.** A loading bar stuck at 99% on the front, and "patience is a myth" on the back.
-- **Distressed Cargo Pants.** Hand bleached panels, with neural pathways embroidered down each leg.
-- **"Hyperfocus" Hoodie.** Heavy 450gsm French terry. The word is printed across the chest in 6pt type, so you have to lean in to read it.
-- **Signal Cap.** A structured 5 panel cap with a static noise print.
-
-## How it went
-
-- The first run sold out in 72 hours
-- We got featured in **Pause Magazine** and **Highsnobiety**
-- We did pop-ups in Shoreditch, London and Lekki, Lagos`,
-      },
-      {
-        id: "brand-story",
-        name: "Brand Story.txt",
-        title: "The worldwideADHD Story",
-        body: `# The worldwideADHD Story
-
-## How it started
-
-worldwideADHD started as a joke. I wrote the name on a sticky note in a lecture I wasn't listening to. People kept asking me about it, so I turned it into a brand. It's not about a diagnosis. It's about how your brain opens 47 thoughts at once, and how good ideas never really come in a straight line.
-
-## What we make
-
-Streetwear. Every collection is about attention in some way: where it goes, how we lose it, and what happens when we finally lock in. I want people to stop you and ask about what you're wearing. When that happens, the piece has done its job.
-
-## What we care about
-
-- **Being honest.** We don't chase trends. We make what feels true to us.
-- **The community.** Every drop has pieces designed with people from the community.
-- **Standing out.** If a piece makes you a little uncomfortable, it's probably working.
-
-## So far
-
-- **2023:** Our first drop. 50 tees, printed by hand in a garage and sold through Instagram DMs. They all went.
-- **2024:** Opened the online store, released three collections and did our first pop-up.
-- **2025:** Our first brand collab, and we showed at fringe events during Lagos Fashion Week.
-- **2026:** SS26, our biggest collection yet.
-
-## What's next
-
-Accessories, more sustainable fabrics, and a proper home online for the community. At this point worldwideADHD is as much about the people as the clothes. People who think too fast and feel too much.`,
-      },
-      {
         id: "kaleidoessence-01",
         name: "KaleidoESSENCE 01.webp",
         title: "KaleidoESSENCE pt.1, page 1",
