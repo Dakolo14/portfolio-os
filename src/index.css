@@ -872,7 +872,7 @@ input {
   align-items: center;
   justify-content: center;
   background-color: #222;
-  background-image: url('./assets/wallpaper.png');
+  background-image: url('./assets/wallpaper.webp');
   background-size: cover;
   background-position: center;
 }

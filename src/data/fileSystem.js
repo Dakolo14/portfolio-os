@@ -120,6 +120,34 @@ Someone could have used this to:
 - Enumerating subdomains was worth it. The main domain was locked down, but the smaller services weren't.
 - Google's VRP team was quick and easy to work with. Write a clear report and they'll pay fairly.`,
       },
+      {
+        id: "cert-ceh",
+        name: "CEH Certificate.webp",
+        title: "Certified Ethical Hacker (EC-Council)",
+        alt: "Certified Ethical Hacker (EC-Council) certificate for Olukolade Daramola",
+        src: "/media/bug-bounty/ceh-certificate.webp",
+      },
+      {
+        id: "cert-security-plus",
+        name: "Security+ Certificate.webp",
+        title: "CompTIA Security+ ce",
+        alt: "CompTIA Security+ ce certificate for Olukolade Daramola",
+        src: "/media/bug-bounty/security-plus-certificate.webp",
+      },
+      {
+        id: "cert-cysa-plus",
+        name: "CySA+ Certificate.webp",
+        title: "CompTIA CySA+ ce",
+        alt: "CompTIA CySA+ ce certificate for Olukolade Daramola",
+        src: "/media/bug-bounty/cysa-plus-certificate.webp",
+      },
+      {
+        id: "cert-isc2-cc",
+        name: "ISC2 CC Certificate.webp",
+        title: "ISC2 Certified in Cybersecurity",
+        alt: "ISC2 Certified in Cybersecurity certificate for Olukolade Daramola",
+        src: "/media/bug-bounty/isc2-cc-certificate.webp",
+      },
     ],
   },
   {

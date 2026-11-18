@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { desktop } from "../data/fileSystem";
 import DesktopIcon from "./DesktopIcon";
 import ContextMenu from "./ContextMenu";
-import wallpaper from "../assets/wallpaper.png";
+import wallpaper from "../assets/wallpaper.webp";
 
 // ============================================================
 // Desktop — Wallpaper + icon grid (windows moved to App level)
