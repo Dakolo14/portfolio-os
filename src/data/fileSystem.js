@@ -10,8 +10,8 @@
 
 export const desktop = [
   {
-    id: "worldwideadhd",
-    name: "worldwideadhd",
+    id: "worldwideADHD",
+    name: "worldwideADHD",
     files: [
       {
         id: "campaign-ss26",
@@ -19,7 +19,7 @@ export const desktop = [
         title: "SS26 Campaign",
         body: `# SS26 Campaign
 
-SS26 is the biggest thing worldwideadhd has put out so far. The whole collection is about sensory overload, that feeling of having way too many tabs open in your head.
+SS26 is the biggest thing worldwideADHD has put out so far. The whole collection is about sensory overload, that feeling of having way too many tabs open in your head.
 
 ## The idea
 
@@ -45,12 +45,12 @@ We shot it in Lagos and London, out on the street around a lot of brutalist buil
       {
         id: "brand-story",
         name: "Brand Story.txt",
-        title: "The worldwideadhd Story",
-        body: `# The worldwideadhd Story
+        title: "The worldwideADHD Story",
+        body: `# The worldwideADHD Story
 
 ## How it started
 
-worldwideadhd started as a joke. I wrote the name on a sticky note in a lecture I wasn't listening to. People kept asking me about it, so I turned it into a brand. It's not about a diagnosis. It's about how your brain opens 47 thoughts at once, and how good ideas never really come in a straight line.
+worldwideADHD started as a joke. I wrote the name on a sticky note in a lecture I wasn't listening to. People kept asking me about it, so I turned it into a brand. It's not about a diagnosis. It's about how your brain opens 47 thoughts at once, and how good ideas never really come in a straight line.
 
 ## What we make
 
@@ -71,7 +71,7 @@ Streetwear. Every collection is about attention in some way: where it goes, how 
 
 ## What's next
 
-Accessories, more sustainable fabrics, and a proper home online for the community. At this point worldwideadhd is as much about the people as the clothes. People who think too fast and feel too much.`,
+Accessories, more sustainable fabrics, and a proper home online for the community. At this point worldwideADHD is as much about the people as the clothes. People who think too fast and feel too much.`,
       },
     ],
   },
@@ -202,7 +202,7 @@ I do a lot of different things, but mostly I'm a security researcher and a creat
 - API design and integrations
 
 **Creative**
-- Brand strategy and creative direction for worldwideadhd
+- Brand strategy and creative direction for worldwideADHD
 - Classical and contemporary piano
 - Photography`,
       },
@@ -246,6 +246,6 @@ export const owner = {
   name: "Kolade",
   username: "kolade",
   hostname: "portfolio",
-  bio: "Security researcher, pianist, creative director, and builder of worldwideadhd.",
+  bio: "Security researcher, pianist, creative director, and builder of worldwideADHD.",
   email: "hello@kolade.dev",
 };

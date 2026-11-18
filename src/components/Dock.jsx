@@ -115,11 +115,11 @@ export default function Dock() {
           )}
         </button>
         
-        {/* 3. Portfolio / Work — opens worldwideadhd folder */}
+        {/* 3. Portfolio / Work — opens worldwideADHD folder */}
         <button
-          className={`dock__item ${isWindowOpen("folder-worldwideadhd") ? "dock__item--active" : ""}`}
+          className={`dock__item ${isWindowOpen("folder-worldwideADHD") ? "dock__item--active" : ""}`}
           onClick={() => {
-            const folder = desktop.find((f) => f.id === "worldwideadhd");
+            const folder = desktop.find((f) => f.id === "worldwideADHD");
             if (folder) handleDockClick(folder);
           }}
           title="Portfolio"
@@ -133,13 +133,13 @@ export default function Dock() {
             </div>
           </div>
           <span className="dock__label">Portfolio</span>
-          {windows.some((w) => w.id === "folder-worldwideadhd") && (
+          {windows.some((w) => w.id === "folder-worldwideADHD") && (
             <span className="dock__indicator" />
           )}
         </button>
 
-        {/* 4. Other Folder launchers (excluding worldwideadhd) */}
-        {desktop.filter((f) => f.id !== "worldwideadhd").map((folder) => {
+        {/* 4. Other Folder launchers (excluding worldwideADHD) */}
+        {desktop.filter((f) => f.id !== "worldwideADHD").map((folder) => {
           const windowState = getWindowState(folder.id);
           return (
             <button
